@@ -1,0 +1,16 @@
+{
+    "name": "atokovoy/oauth-security-proxy",
+    "description": "OAuth Security Proxy",
+    "version": "0.0.9",
+    "type": "library",
+    "homepage": "https://github.com/atokovoy",
+    "require": {
+        "php": ">=5.3.0",
+        "guzzle/guzzle": "3.0.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "OAuth": ""
+        }
+    }
+}

@@ -1,0 +1,20 @@
+services:
+    oauth_proxy.transport.user:
+        class: Guzzle\Http\Client
+        arguments: [%oauth_user_provider_url%, [curl.options:[CURLOPT_CONNECTTIMEOUT:20]]
+
+    oauth_proxy.user_provider.token:
+        class:  OAuth\SecurityProxyBundle\Security\User\OAuthUserProvider
+        arguments: [@oauth_proxy.transport.user]
+
+    oauth_proxy.security.authentication.provider:
+        class: OAuth\SecurityProxyBundle\Security\Authentication\Provider\OAuthProvider
+        arguments: [@oauth_proxy.user_provider.token]
+
+    oauth_proxy.security.authentication.listener:
+        class: OAuth\SecurityProxyBundle\Security\Firewall\OAuthListener
+        arguments: ["@security.context", "@security.authentication.manager"]
+
+    oauth_proxy.security.entry_point:
+        class: OAuth\SecurityProxyBundle\Security\EntryPoint\OAuthEntryPoint
+
